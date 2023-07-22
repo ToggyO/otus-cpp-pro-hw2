@@ -4,7 +4,7 @@ set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 set(IP_FILTER_PROJECT_NAME ip_filter CACHE INTERNAL "")
 
-project(ip_filter VERSION ${PROJECT_VESRION})
+project(ip_filter.src VERSION ${PROJECT_VESRION})
 
 file(GLOB SOURCES *.cpp *.h ipv4/*.cpp ipv4/*.h utils/*.cpp utils/*.h)
 
