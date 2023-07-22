@@ -17,6 +17,8 @@ endif()
 
 find_package(GTest REQUIRED)
 
+enable_testing()
+
 add_executable(tests ${TEST_SOURCES})
 
 set_target_properties(tests PROPERTIES
@@ -29,6 +31,7 @@ target_link_libraries(tests PUBLIC
     GTest::gtest_main
 )
 
-target_include_directories(tests PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+include(GoogleTest)
+gtest_discover_tests(tests)
 
-enable_testing()
+target_include_directories(tests PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
