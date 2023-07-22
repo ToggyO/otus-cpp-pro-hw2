@@ -22,7 +22,7 @@ jobs:
       - run: cmake --build ./build
 
       - name: Run tests
-        run: bash ./build/tests/tests
+        run: cd ./build/tests && ctest
 
       - run: cmake --build ./build --target package
 
