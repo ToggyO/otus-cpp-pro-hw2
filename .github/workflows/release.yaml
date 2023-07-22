@@ -26,6 +26,8 @@ jobs:
 
       - run: cmake --build ./build --target package
 
+      - run: ls -la && cd ./build && ls -la
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
