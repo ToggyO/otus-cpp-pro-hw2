@@ -17,9 +17,9 @@ public:
 
     IpV4(size_t, size_t, size_t, size_t);
 
-    IpV4(const std::vector<size_t> &);
+    explicit IpV4(const std::vector<size_t> &);
 
-    IpV4(std::vector<size_t> &&);
+    explicit IpV4(std::vector<size_t> &&);
 
     size_t get_part(IpV4Part) const;
 
@@ -27,8 +27,8 @@ public:
 
     std::string to_string() const;
 
-    template <class __OutputStream>
-    static void print_ips(const std::vector<IpV4> &v, __OutputStream &os)
+    template <class __OutStream>
+    static void print_ips(const std::vector<IpV4> &v, __OutStream &os)
     {
         for (const auto &ip : v) { os << ip.to_string() << std::endl; }
     }

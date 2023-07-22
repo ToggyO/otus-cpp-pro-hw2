@@ -29,7 +29,7 @@ std::string exec(std::string &command)
     return ss.str();
 }
 
-// TODO: LINUX SPECIFIC!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// LINUX SPECIFIC!!!
 TEST(IpFilter, Check_Md5Hash) {
     static const std::string k_pipe = " | ";
     static const std::string expected_hash = "24e7a7b2270daee89c64d3ca5fb3da1a";
@@ -48,7 +48,7 @@ TEST(IpFilter, Check_Md5Hash) {
     auto cmd = oss.str();
     auto actual_hash = exec(cmd);
 
-    actual_hash = std::regex_replace(actual_hash, std::regex("\\r\\n|\\r|\\n"), "");
+    actual_hash = std::regex_replace(actual_hash, std::regex(R"(\r\n|\r|\n)"), "");
 
     EXPECT_EQ(actual_hash, expected_hash);
 }

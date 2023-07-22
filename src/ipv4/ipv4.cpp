@@ -4,10 +4,10 @@ IpV4::IpV4(std::size_t first, std::size_t second, std::size_t third, std::size_t
     : m_ip_parts{}
 {
     m_ip_parts.reserve(IpV4::ip_parts_count);
-    m_ip_parts.push_back(std::move(first));
-    m_ip_parts.push_back(std::move(second));
-    m_ip_parts.push_back(std::move(third));
-    m_ip_parts.push_back(std::move(forth));
+    m_ip_parts.push_back(first);
+    m_ip_parts.push_back(second);
+    m_ip_parts.push_back(third);
+    m_ip_parts.push_back(forth);
 }
 
 IpV4::IpV4(const std::vector<size_t> &ip_parts)

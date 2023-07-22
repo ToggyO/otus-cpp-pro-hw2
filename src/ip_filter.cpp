@@ -1,10 +1,6 @@
 #include <algorithm>
-#include <cassert>
-#include <cstdlib>
 #include <iostream>
-#include <sstream>
 #include <string>
-#include <thread>
 #include <vector>
 
 #include "ipv4/ipv4.h"
@@ -25,7 +21,7 @@ void fill_ip_pool(std::vector<IpV4> &ip_pool)
         split_result = std::move(Utils::split(split_result.at(0), '.'));
 
         std::transform(split_result.begin(), split_result.end(), std::back_inserter(ipv4_parts),
-            [&](std::string str) { return std::stoi(str); });
+            [&](const std::string &str) { return std::stoi(str); });
 
         if (ipv4_parts.size() < IpV4::ip_parts_count)
         {
