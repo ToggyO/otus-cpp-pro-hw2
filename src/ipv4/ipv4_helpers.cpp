@@ -43,11 +43,10 @@ void IpV4Helpers::filter_any(const std::vector<IpV4> &raw, std::vector<IpV4> &re
     IpV4Helpers::m_filter(raw, result, [&byte] (const IpV4 &ip)
     {
         auto ip_parts = ip.get_all_parts();
-        std::any_of(ip_parts.begin(), ip_parts.end(), [&byte](const size_t &part)
+        return std::any_of(ip_parts.begin(), ip_parts.end(), [&byte](const size_t &part)
         {
             return part == byte;
         });
-        return false;
     });
 }
 
