@@ -10,25 +10,11 @@
 void fill_ip_pool(std::vector<IpV4> &ip_pool)
 {
     std::vector<std::string> split_result;
-    std::vector<size_t> ipv4_parts;
-    ipv4_parts.reserve(IpV4::ip_parts_count);
-
-    for(std::string line; std::getline(std::cin, line);)
+    for (std::string line; std::getline(std::cin, line);)
     {
-        ipv4_parts.clear();
-
         split_result = std::move(Utils::split(line, '\t'));
         split_result = std::move(Utils::split(split_result.at(0), '.'));
-
-        std::transform(split_result.begin(), split_result.end(), std::back_inserter(ipv4_parts),
-            [&](const std::string &str) { return std::stoi(str); });
-
-        if (ipv4_parts.size() < IpV4::ip_parts_count)
-        {
-            throw std::runtime_error("IpV4 must contain exact " + std::to_string(IpV4::ip_parts_count) + " components");
-        }
-
-        ip_pool.push_back(std::move(IpV4(ipv4_parts[0], ipv4_parts[1], ipv4_parts[2], ipv4_parts[3])));
+        ip_pool.emplace_back(std::stoi(split_result[0]), std::stoi(split_result[1]), std::stoi(split_result[2]), std::stoi(split_result[3]));
     }
 }
 

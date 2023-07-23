@@ -35,13 +35,13 @@ TEST(IpFilter, Check_Md5Hash) {
     static const std::string expected_hash = "24e7a7b2270daee89c64d3ca5fb3da1a";
 
     auto project_root = getTestProjectRoot();
-    auto excecutable = getTestedExecutablePath();
+    auto executable = getTestedExecutablePath();
     auto test_data_file_path = std::filesystem::path(project_root) / "ip_filter.tsv";
 
     std::ostringstream oss;
     oss << "cat "
         << test_data_file_path << k_pipe
-        << excecutable << k_pipe
+        << executable << k_pipe
         << "md5sum" << k_pipe
         << "cut -c -32";
 
