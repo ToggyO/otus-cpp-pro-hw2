@@ -3,27 +3,64 @@
 #include <algorithm>
 #include <array>
 #include <cstddef>
+#include <iterator>
 #include <stdexcept>
 #include <string>
 #include <sstream>
 #include <vector>
+#include <memory>
 
 class IpV4
 {
+private:
+    struct ipv4_components
+    {
+        size_t first;
+        size_t second;
+        size_t third;
+        size_t forth;
+    };
+
 public:
-    enum class IpV4Part { first, second, third, forth };
+    // Constants
+    const static size_t ip_components_count = 4;
 
-    const static size_t ip_parts_count = 4;
+    // Typedefs
+    using IpV4ComponentArray = std::array<size_t, IpV4::ip_components_count>;
 
+    enum class IpV4Component { first, second, third, forth };
+
+    // Iterator
+    class IpV4ComponentIterator
+    {
+    public:
+        using itr_type = IpV4ComponentIterator;
+        using value_type = size_t;
+        using reference = value_type&;
+        using pointer = value_type*;
+        using iterator_category = std::input_iterator_tag;
+        using difference_type = std::ptrdiff_t;
+
+        explicit IpV4ComponentIterator(pointer ptr) : m_ptr{ptr} {}
+
+        itr_type& operator++();
+        itr_type operator++(int);
+        reference operator*() const;
+        pointer operator->() const;
+        bool operator==(const itr_type&) const;
+        bool operator!=(const itr_type&) const;
+
+    private:
+        pointer m_ptr;
+    };
+
+    // Ctors
     IpV4(size_t, size_t, size_t, size_t);
 
-    explicit IpV4(const std::vector<size_t> &);
+    // Methods
+    size_t get_component(IpV4Component) const;
 
-    explicit IpV4(std::vector<size_t> &&);
-
-    size_t get_part(IpV4Part) const;
-
-    std::array<size_t, IpV4::ip_parts_count> get_all_parts() const;
+    IpV4ComponentArray get_all_components() const;
 
     std::string to_string() const;
 
@@ -33,8 +70,13 @@ public:
         for (const auto &ip : v) { os << ip.to_string() << std::endl; }
     }
 
+    IpV4ComponentIterator cbegin() const;
+
+    IpV4ComponentIterator cend() const;
+
+    // Operators
     bool operator>(const IpV4 &ip2) const;
 
 private:
-    std::vector<size_t> m_ip_parts;
+    ipv4_components m_ip_components;
 };
