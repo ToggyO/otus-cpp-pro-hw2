@@ -13,13 +13,13 @@
 class IpV4
 {
 private:
-    struct ipv4_components
-    {
-        size_t first;
-        size_t second;
-        size_t third;
-        size_t forth;
-    };
+//    struct ipv4_components
+//    {
+//        size_t first;
+//        size_t second;
+//        size_t third;
+//        size_t forth;
+//    };
 
 public:
     // Constants
@@ -28,31 +28,33 @@ public:
     // Typedefs
     using IpV4ComponentArray = std::array<size_t, IpV4::ip_components_count>;
 
+    using IpV4ComponentIterator = std::array<size_t, IpV4::ip_components_count>::const_iterator;
+
     enum class IpV4Component { first, second, third, forth };
 
     // Iterator
-    class IpV4ComponentIterator
-    {
-    public:
-        using itr_type = IpV4ComponentIterator;
-        using value_type = size_t;
-        using reference = value_type&;
-        using pointer = value_type*;
-        using iterator_category = std::input_iterator_tag;
-        using difference_type = std::ptrdiff_t;
-
-        explicit IpV4ComponentIterator(pointer ptr) : m_ptr{ptr} {}
-
-        itr_type& operator++();
-        itr_type operator++(int);
-        reference operator*() const;
-        pointer operator->() const;
-        bool operator==(const itr_type&) const;
-        bool operator!=(const itr_type&) const;
-
-    private:
-        pointer m_ptr;
-    };
+//    class IpV4ComponentIterator
+//    {
+//    public:
+//        using itr_type = IpV4ComponentIterator;
+//        using value_type = size_t;
+//        using reference = value_type&;
+//        using pointer = value_type*;
+//        using iterator_category = std::input_iterator_tag;
+//        using difference_type = std::ptrdiff_t;
+//
+//        explicit IpV4ComponentIterator(pointer ptr) : m_ptr{ptr} {}
+//
+//        itr_type& operator++();
+//        itr_type operator++(int);
+//        reference operator*() const;
+//        pointer operator->() const;
+//        bool operator==(const itr_type&) const;
+//        bool operator!=(const itr_type&) const;
+//
+//    private:
+//        pointer m_ptr;
+//    };
 
     // Ctors
     IpV4(size_t, size_t, size_t, size_t);
@@ -71,12 +73,15 @@ public:
     }
 
     IpV4ComponentIterator cbegin() const;
+//    IpV4ComponentIterator cbegin() const;
 
     IpV4ComponentIterator cend() const;
+//    IpV4ComponentIterator cend() const;
 
     // Operators
     bool operator>(const IpV4 &ip2) const;
 
 private:
-    ipv4_components m_ip_components;
+    IpV4ComponentArray m_ip_components;
+//    ipv4_components m_ip_components;
 };
