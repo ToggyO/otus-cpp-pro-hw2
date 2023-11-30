@@ -21,9 +21,7 @@ size_t IpV4::get_component(IpV4Component part) const
 
 std::array<size_t, IpV4::ip_components_count> IpV4::get_all_components() const
 {
-//    return {m_ip_components[0], m_ip_components[1], m_ip_components[2], m_ip_components[3]};
     return m_ip_components;
-//    return {m_ip_components.first, m_ip_components.second, m_ip_components.third, m_ip_components.forth};
 }
 
 std::string IpV4::to_string() const
@@ -45,7 +43,7 @@ std::string IpV4::to_string() const
 // Operators
 bool IpV4::operator>(const IpV4 &other) const
 {
-    for (auto iter1 = cbegin(), iter2 = other.cbegin(); iter1 != cend() && iter2 != cend(); ++iter1, ++iter2)
+    for (auto iter1 = cbegin(), iter2 = other.cbegin(); iter1 != cend() && iter2 != other.cend(); ++iter1, ++iter2)
     {
         auto component1 = *iter1;
         auto component2 = *iter2;
@@ -53,7 +51,6 @@ bool IpV4::operator>(const IpV4 &other) const
         if (component1 == component2) { continue; }
 
         return component2 < component1;
-
     }
     return false;
 }
@@ -67,45 +64,3 @@ IpV4::IpV4ComponentIterator IpV4::cend() const
 {
     return m_ip_components.cend();
 }
-
-//IpV4::IpV4ComponentIterator IpV4::cbegin() const
-//{
-//   return IpV4ComponentIterator(m_ip_components.begin());
-//}
-//
-//IpV4::IpV4ComponentIterator IpV4::cend() const
-//{
-//   return IpV4ComponentIterator((size_t*)&m_ip_components[3] + 1);
-//}
-
-// Iterators
-//IpV4::IpV4ComponentIterator::itr_type& IpV4::IpV4ComponentIterator::operator++()
-//{
-//    m_ptr++;
-//    return *this;
-//}
-//
-//IpV4::IpV4ComponentIterator::itr_type IpV4::IpV4ComponentIterator::operator++(int)
-//{
-//    return IpV4ComponentIterator(m_ptr++);
-//}
-//
-//IpV4::IpV4ComponentIterator::reference IpV4::IpV4ComponentIterator::operator*() const
-//{
-//    return *m_ptr;
-//}
-//
-//IpV4::IpV4ComponentIterator::pointer IpV4::IpV4ComponentIterator::operator->() const
-//{
-//    return m_ptr;
-//}
-//
-//bool IpV4::IpV4ComponentIterator::operator==(const itr_type& other) const
-//{
-//    return m_ptr == other.m_ptr;
-//}
-//
-//bool IpV4::IpV4ComponentIterator::operator!=(const itr_type& other) const
-//{
-//    return m_ptr != other.m_ptr;
-//}

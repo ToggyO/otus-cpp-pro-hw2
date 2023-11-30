@@ -10,7 +10,8 @@
 void fill_ip_pool(std::vector<IpV4> &ip_pool)
 {
     std::vector<std::string> split_result;
-    for (std::string line; std::getline(std::cin, line);)
+    std::string line;
+    while (std::getline(std::cin, line))
     {
         split_result = std::move(Utils::split(line, '\t'));
         split_result = std::move(Utils::split(split_result.at(0), '.'));
